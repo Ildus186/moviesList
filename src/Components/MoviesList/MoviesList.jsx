@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Pagination, Alert, Spin } from 'antd'
+import React, { Component } from "react"
+import { Pagination, Alert, Spin } from "antd"
 
-import Movie from '../Movie/Movie'
+import Movie from "../Movie/Movie"
 
-import './MoviesList.css'
+import "./MoviesList.css"
 
 export default class MoviesList extends Component {
   state = {
@@ -20,16 +20,7 @@ export default class MoviesList extends Component {
   }
 
   render() {
-    const {
-      data,
-      currentPage,
-      changePage,
-      totalMovies,
-      isLoading,
-      error,
-      guestSessionId,
-      getRatedMovies,
-    } = this.props
+    const { data, currentPage, changePage, totalMovies, isLoading, error, guestSessionId, getRatedMovies } = this.props
 
     const elements = data.map((item) => {
       const { id, ...other } = item
@@ -48,7 +39,7 @@ export default class MoviesList extends Component {
 
     const contentStyle = {
       padding: 100,
-      background: 'transparent',
+      background: "transparent",
     }
 
     const content = <div style={contentStyle} />
@@ -65,14 +56,7 @@ export default class MoviesList extends Component {
     }
 
     if (error) {
-      return (
-        <Alert
-          message="Error"
-          description="The request did not give positive results."
-          type="error"
-          showIcon
-        />
-      )
+      return <Alert message="Error" description="The request did not give positive results." type="error" showIcon />
     }
 
     if (data.length === 0) {
@@ -82,14 +66,7 @@ export default class MoviesList extends Component {
     return (
       <>
         <ul className="list">{elements}</ul>
-        <Pagination
-          align="center"
-          current={currentPage}
-          pageSize={20}
-          onChange={changePage}
-          total={totalMovies}
-          showSizeChanger={false}
-        />
+        <Pagination align="center" current={currentPage} pageSize={20} onChange={changePage} total={totalMovies} showSizeChanger={false} />
       </>
     )
   }

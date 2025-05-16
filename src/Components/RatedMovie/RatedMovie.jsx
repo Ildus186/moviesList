@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import { parse, format } from 'date-fns'
-import { Rate } from 'antd'
+import React, { Component } from "react"
+import { parse, format } from "date-fns"
+import { Rate } from "antd"
 
-import lenta from './lenta.png'
-import { GenresConsumer } from '../GenresContext/GenresContext'
+import lenta from "./lenta.png"
+import { GenresConsumer } from "../GenresContext/GenresContext"
 
 export default class Movie extends Component {
   changeDate = (date) => {
-    if (date === '') return 'The release date is unknown'
-    const parsedDate = parse(date, 'yyyy-MM-dd', new Date())
-    const formattedDate = format(parsedDate, 'MMMM d, yyyy')
+    if (date === "") return "The release date is unknown"
+    const parsedDate = parse(date, "yyyy-MM-dd", new Date())
+    const formattedDate = format(parsedDate, "MMMM d, yyyy")
     return formattedDate
   }
 
@@ -17,7 +17,7 @@ export default class Movie extends Component {
     if (string.length < start + 1) return string
     let foundIndex = -1
     for (let i = start; i < end; i++) {
-      if (string[i] === ' ') {
+      if (string[i] === " ") {
         foundIndex = i
         break
       }
@@ -40,13 +40,13 @@ export default class Movie extends Component {
 
     let borderStyle = {}
     if (voteAverage < 3) {
-      borderStyle = { borderColor: '#E90000' }
+      borderStyle = { borderColor: "#E90000" }
     } else if (voteAverage >= 3 && voteAverage < 5) {
-      borderStyle = { borderColor: '#E97E00' }
+      borderStyle = { borderColor: "#E97E00" }
     } else if (voteAverage >= 5 && voteAverage < 7) {
-      borderStyle = { borderColor: '#E9D100' }
+      borderStyle = { borderColor: "#E9D100" }
     } else {
-      borderStyle = { borderColor: '#66E900' }
+      borderStyle = { borderColor: "#66E900" }
     }
 
     return (
@@ -56,7 +56,7 @@ export default class Movie extends Component {
             const movieGenres = genre_ids
               .map((el) => {
                 const genre = genres.find((g) => g.id === el)
-                return genre ? genre.name : ''
+                return genre ? genre.name : ""
               })
               .slice(0, 3)
 

@@ -1,11 +1,11 @@
-import { Component } from 'react'
-import './App.css'
-import { Tabs } from 'antd'
+import { Component } from "react"
+import "./App.css"
+import { Tabs } from "antd"
 
-import MoviesList from './Components/MoviesList/MoviesList'
-import RatedMoviesList from './Components/RatedMoviesList/RatedMoviesList'
-import SearchMovie from './Components/SearchMovie/SearchMovie'
-import { GenresProvider } from './Components/GenresContext/GenresContext'
+import MoviesList from "./Components/MoviesList/MoviesList"
+import RatedMoviesList from "./Components/RatedMoviesList/RatedMoviesList"
+import SearchMovie from "./Components/SearchMovie/SearchMovie"
+import { GenresProvider } from "./Components/GenresContext/GenresContext"
 
 export default class App extends Component {
   state = {
@@ -17,8 +17,8 @@ export default class App extends Component {
     errorRated: null,
     currentPage: 1,
     currentRatedPage: 1,
-    query: 'return',
-    newTab: 'Search',
+    query: "return",
+    newTab: "Search",
     guestSessionId: null,
     ratedMovies: [],
     totalRatedMovies: null,
@@ -45,7 +45,7 @@ export default class App extends Component {
       },
       () => {
         this.getMovies()
-      },
+      }
     )
   }
 
@@ -56,7 +56,7 @@ export default class App extends Component {
       },
       () => {
         this.getRatedMovies()
-      },
+      }
     )
   }
 
@@ -67,25 +67,23 @@ export default class App extends Component {
       },
       () => {
         this.getMovies()
-      },
+      }
     )
   }
 
   createGuestSession = async () => {
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/authentication/guest_session/new?api_key=9f36f1f6e5e5000e0da211b3f98ec3ad`,
-      )
+      const response = await fetch(`https://api.themoviedb.org/3/authentication/guest_session/new?api_key=9f36f1f6e5e5000e0da211b3f98ec3ad`)
       const session = await response.json()
 
       if (session.success) {
         console.log(session.guest_session_id)
         this.setState({ guestSessionId: session.guest_session_id })
       } else {
-        console.error('Failed to create guest session:', session)
+        console.error("Failed to create guest session:", session)
       }
     } catch (error) {
-      console.error('Error creating guest session:', error)
+      console.error("Error creating guest session:", error)
     }
   }
 
@@ -94,11 +92,11 @@ export default class App extends Component {
     if (guestSessionId) {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=9f36f1f6e5e5000e0da211b3f98ec3ad&language=ru-RU&page=${currentRatedPage}`,
+          `https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=9f36f1f6e5e5000e0da211b3f98ec3ad&language=ru-RU&page=${currentRatedPage}`
         )
         if (!response.ok) {
           this.setState({ errorRated: true })
-          throw new Error('Network response was not ok')
+          throw new Error("Network response was not ok")
         }
         this.setState({ errorRated: false })
         const data = await response.json()
@@ -108,7 +106,7 @@ export default class App extends Component {
           totalRatedMovies: data.total_results,
         })
       } catch (error) {
-        console.error('Error fetching rated movies:', error)
+        console.error("Error fetching rated movies:", error)
         this.setState({ errorRated: true })
       }
     }
@@ -121,16 +119,16 @@ export default class App extends Component {
       const response = await fetch(
         `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${currentPage}`,
         {
-          method: 'GET',
+          method: "GET",
           headers: {
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjM2ZjFmNmU1ZTUwMDBlMGRhMjExYjNmOThlYzNhZCIsIm5iZiI6MTc0NTI1NzMxMy44OTc5OTk4LCJzdWIiOiI2ODA2ODM2MTQyMWEzMDk3NWNhYWNhNzAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.A-_NMdxuoMeRUwTAJHSoxI7pvyz4Swz1QRiwElvshBg',
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjM2ZjFmNmU1ZTUwMDBlMGRhMjExYjNmOThlYzNhZCIsIm5iZiI6MTc0NTI1NzMxMy44OTc5OTk4LCJzdWIiOiI2ODA2ODM2MTQyMWEzMDk3NWNhYWNhNzAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.A-_NMdxuoMeRUwTAJHSoxI7pvyz4Swz1QRiwElvshBg",
           },
-        },
+        }
       )
 
       if (!response.ok) {
-        throw new Error('Network response was not ok')
+        throw new Error("Network response was not ok")
       }
 
       const movies = await response.json()
@@ -140,7 +138,7 @@ export default class App extends Component {
         isLoading: false,
       })
     } catch (error) {
-      console.error('There was a problem fetching the data:', error)
+      console.error("There was a problem fetching the data:", error)
       this.setState({
         error: error.message,
         isLoading: false,
@@ -151,15 +149,15 @@ export default class App extends Component {
   getGenres = async () => {
     try {
       const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?language=en`, {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjM2ZjFmNmU1ZTUwMDBlMGRhMjExYjNmOThlYzNhZCIsIm5iZiI6MS43NDUyNTczMTM4OTc5OTk4ZSs5LCJzdWIiOiI2ODA2ODM2MTQyMWEzMDk3NWNhYWNhNzAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.FWM9blBaCBaooaCGRKwhQpGZr3OibtPM-ELH8wskHzg',
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjM2ZjFmNmU1ZTUwMDBlMGRhMjExYjNmOThlYzNhZCIsIm5iZiI6MS43NDUyNTczMTM4OTc5OTk4ZSs5LCJzdWIiOiI2ODA2ODM2MTQyMWEzMDk3NWNhYWNhNzAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.FWM9blBaCBaooaCGRKwhQpGZr3OibtPM-ELH8wskHzg",
         },
       })
 
       if (!response.ok) {
-        throw new Error('Network response was not ok')
+        throw new Error("Network response was not ok")
       }
 
       const genres = await response.json()
@@ -167,7 +165,7 @@ export default class App extends Component {
         genres: genres.genres,
       })
     } catch (error) {
-      console.error('There was a problem fetching the data:', error)
+      console.error("There was a problem fetching the data:", error)
       this.setState({
         error: error.message,
       })
@@ -191,8 +189,8 @@ export default class App extends Component {
     } = this.state
     const items = [
       {
-        key: '1',
-        label: 'Search',
+        key: "1",
+        label: "Search",
         children: (
           <>
             <GenresProvider value={genres}>
@@ -212,8 +210,8 @@ export default class App extends Component {
         ),
       },
       {
-        key: '2',
-        label: 'Rated',
+        key: "2",
+        label: "Rated",
         children: (
           <>
             <GenresProvider value={genres}>

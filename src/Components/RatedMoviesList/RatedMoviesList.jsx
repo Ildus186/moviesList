@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Pagination, Alert, Spin } from 'antd'
+import React, { Component } from "react"
+import { Pagination, Alert, Spin } from "antd"
 
-import RatedMovie from '../RatedMovie/RatedMovie'
+import RatedMovie from "../RatedMovie/RatedMovie"
 
 export default class MoviesList extends Component {
   render() {

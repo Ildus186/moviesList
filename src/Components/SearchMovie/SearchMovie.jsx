@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { debounce } from 'lodash'
+import React, { Component } from "react"
+import { debounce } from "lodash"
 
-import './SearchMovie.css'
+import "./SearchMovie.css"
 
 export default class SearchMovie extends Component {
   state = {
-    label: '',
+    label: "",
   }
 
   debounceChangeQuery = debounce((query) => {
@@ -20,7 +20,7 @@ export default class SearchMovie extends Component {
       },
       () => {
         this.debounceChangeQuery(newLabel)
-      },
+      }
     )
     this.props.changePage(1)
   }
@@ -34,13 +34,7 @@ export default class SearchMovie extends Component {
     return (
       <>
         <form className="searchForm" onSubmit={this.onSubmit}>
-          <input
-            className="searchInput"
-            value={this.state.label}
-            onChange={this.onLabelChange}
-            placeholder="Type to search..."
-            autoFocus
-          ></input>
+          <input className="searchInput" value={this.state.label} onChange={this.onLabelChange} placeholder="Type to search..." autoFocus></input>
         </form>
       </>
     )
