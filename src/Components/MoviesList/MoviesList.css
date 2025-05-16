@@ -1,0 +1,50 @@
+.list {
+  list-style-type: none;
+  margin: 0 auto;
+  max-width: 390px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 37px;
+  margin-bottom: 30px;
+  padding-left: 0px;
+}
+
+.ant-pagination-item-active {
+  background-color: rgb(24, 144, 255) !important;
+  color: white !important;
+}
+
+.ant-pagination-item.ant-pagination-item-active > a {
+  color: white !important;
+  font-size: 12px;
+}
+
+.ant-pagination-item a {
+  color: rgba(0, 0, 0, 0.65) !important;
+  font-size: 12px;
+}
+
+.ant-alert-message {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+}
+
+@media (min-width: 840px) {
+  .list {
+    max-width: 818px;
+  }
+}
+
+@media (min-width: 1010px) {
+  .list {
+    list-style-type: none;
+    margin: 0 auto;
+    max-width: 98vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 37px;
+    margin-bottom: 30px;
+    padding: 0;
+    padding-left: 35px;
+  }
+}
